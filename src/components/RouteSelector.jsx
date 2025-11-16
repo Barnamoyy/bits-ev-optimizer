@@ -26,9 +26,9 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
   };
 
   return (
-    <div className="card bg-gradient-to-br from-white to-blue-50 border-2 border-blue-200 shadow-xl">
+    <div className="card bg-white border-2 border-gray-300 shadow-xl">
       <div className="flex items-center gap-2 mb-5">
-        <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg">
+        <div className="p-2 bg-black rounded-lg">
           <Route className="w-5 h-5 text-white" />
         </div>
         <h3 className="text-xl font-bold text-gray-800">Route Planner</h3>
@@ -39,7 +39,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <div className="w-6 h-6 bg-black rounded-full flex items-center justify-center">
                 <MapPin className="w-4 h-4 text-white" />
               </div>
               Start Location
@@ -48,7 +48,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
           <select
             value={startLocation}
             onChange={(e) => setStartLocation(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-white text-gray-700 font-medium shadow-sm hover:border-green-400 transition-colors"
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent bg-white text-gray-700 font-medium shadow-sm hover:border-gray-500 transition-colors"
           >
             <option value="">Select start location...</option>
             {allLocations.map((loc) => (
@@ -61,7 +61,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
 
         {/* Arrow Indicator */}
         <div className="flex justify-center">
-          <div className="p-3 bg-gradient-to-r from-green-500 to-red-500 rounded-full">
+          <div className="p-3 bg-gray-600 rounded-full">
             <ArrowRight className="w-6 h-6 text-white" />
           </div>
         </div>
@@ -70,7 +70,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
         <div>
           <label className="block text-sm font-semibold text-gray-700 mb-2">
             <div className="flex items-center gap-2">
-              <div className="w-6 h-6 bg-red-500 rounded-full flex items-center justify-center">
+              <div className="w-6 h-6 bg-gray-700 rounded-full flex items-center justify-center">
                 <MapPin className="w-4 h-4 text-white" />
               </div>
               End Location
@@ -79,7 +79,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
           <select
             value={endLocation}
             onChange={(e) => setEndLocation(e.target.value)}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent bg-white text-gray-700 font-medium shadow-sm hover:border-red-400 transition-colors"
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent bg-white text-gray-700 font-medium shadow-sm hover:border-gray-500 transition-colors"
           >
             <option value="">Select end location...</option>
             {allLocations.map((loc) => (
@@ -98,7 +98,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
         <button
           onClick={handleCalculate}
           disabled={!startLocation || !endLocation || startLocation === endLocation || loading}
-          className="w-full py-4 bg-gradient-to-r from-green-500 via-emerald-500 to-teal-600 hover:from-green-600 hover:via-emerald-600 hover:to-teal-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
+          className="w-full py-4 bg-black hover:bg-gray-800 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
         >
           {loading ? (
             <>
@@ -115,17 +115,17 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
 
         {/* Route Info */}
         {selectedRoute && (
-          <div className="mt-4 p-4 bg-gradient-to-r from-blue-100 to-indigo-100 border-2 border-blue-300 rounded-xl shadow-md">
+          <div className="mt-4 p-4 bg-gray-100 border-2 border-gray-300 rounded-xl shadow-md">
             <div className="text-sm">
               <div className="font-bold text-gray-800 mb-2 flex items-center gap-2">
                 Selected Route
               </div>
               <div className="flex items-center text-gray-700 font-medium">
-                <span className="bg-green-500 text-white px-2 py-1 rounded-md text-xs">
+                <span className="bg-black text-white px-2 py-1 rounded-md text-xs">
                   {selectedRoute.start.name}
                 </span>
                 <ArrowRight className="w-4 h-4 mx-2 text-gray-500" />
-                <span className="bg-red-500 text-white px-2 py-1 rounded-md text-xs">
+                <span className="bg-gray-700 text-white px-2 py-1 rounded-md text-xs">
                   {selectedRoute.end.name}
                 </span>
               </div>
@@ -191,7 +191,7 @@ const RouteSelector = ({ locations, chargingStation, onRouteSelect, selectedRout
 const QuickRouteButton = ({ label, onClick }) => (
   <button
     onClick={onClick}
-    className="w-full text-left px-4 py-3 text-sm font-medium bg-white hover:bg-gradient-to-r hover:from-green-50 hover:to-blue-50 border-2 border-gray-200 hover:border-green-400 rounded-lg transition-all shadow-sm hover:shadow-md transform hover:scale-[1.02] flex items-center gap-3"
+    className="w-full text-left px-4 py-3 text-sm font-medium bg-white hover:bg-gray-100 border-2 border-gray-200 hover:border-gray-400 rounded-lg transition-all shadow-sm hover:shadow-md transform hover:scale-[1.02] flex items-center gap-3"
   >
     <span className="flex-1">{label}</span>
     <ArrowRight className="w-4 h-4 text-gray-400" />

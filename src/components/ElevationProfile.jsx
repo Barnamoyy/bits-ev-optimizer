@@ -14,7 +14,7 @@ const ElevationProfile = ({ elevationData, routeInfo }) => {
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-4 border-2 border-green-200 rounded-xl shadow-xl">
+        <div className="bg-white p-4 border-2 border-gray-300 rounded-xl shadow-xl">
           <p className="text-sm font-bold text-gray-800 mb-1">
             Distance: {payload[0].payload.distance.toFixed(2)} km
           </p>
@@ -35,35 +35,35 @@ const ElevationProfile = ({ elevationData, routeInfo }) => {
     <div>
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-          <div className="p-2 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg">
+          <div className="p-2 bg-black rounded-lg">
             <Mountain className="w-5 h-5 text-white" />
           </div>
           Elevation Profile
         </h3>
         <div className="flex gap-5 text-sm">
-          <div className="flex items-center gap-2 bg-red-50 px-3 py-2 rounded-lg border border-red-200">
-            <TrendingUp className="w-5 h-5 text-red-600" />
+          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg border border-gray-300">
+            <TrendingUp className="w-5 h-5 text-black" />
             <span className="text-gray-700">
-              Gain: <span className="font-bold text-red-600">{routeInfo?.elevationGain?.toFixed(0)}m</span>
+              Gain: <span className="font-bold text-black">{routeInfo?.elevationGain?.toFixed(0)}m</span>
             </span>
           </div>
-          <div className="flex items-center gap-2 bg-green-50 px-3 py-2 rounded-lg border border-green-200">
-            <TrendingDown className="w-5 h-5 text-green-600" />
+          <div className="flex items-center gap-2 bg-gray-100 px-3 py-2 rounded-lg border border-gray-300">
+            <TrendingDown className="w-5 h-5 text-gray-600" />
             <span className="text-gray-700">
-              Loss: <span className="font-bold text-green-600">{routeInfo?.elevationLoss?.toFixed(0)}m</span>
+              Loss: <span className="font-bold text-gray-700">{routeInfo?.elevationLoss?.toFixed(0)}m</span>
             </span>
           </div>
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-blue-50 to-green-50 p-4 rounded-xl">
+      <div className="bg-gray-50 p-4 rounded-xl border border-gray-200">
         <ResponsiveContainer width="100%" height={280}>
           <AreaChart data={elevationData} margin={{ top: 10, right: 30, left: 10, bottom: 10 }}>
             <defs>
               <linearGradient id="elevationGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#10b981" stopOpacity={0.9} />
-                <stop offset="50%" stopColor="#059669" stopOpacity={0.6} />
-                <stop offset="95%" stopColor="#047857" stopOpacity={0.3} />
+                <stop offset="5%" stopColor="#000000" stopOpacity={0.3} />
+                <stop offset="50%" stopColor="#555555" stopOpacity={0.2} />
+                <stop offset="95%" stopColor="#999999" stopOpacity={0.1} />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#d1d5db" opacity={0.5} />
@@ -83,7 +83,7 @@ const ElevationProfile = ({ elevationData, routeInfo }) => {
             <Area 
               type="monotone" 
               dataKey="elevation" 
-              stroke="#059669" 
+              stroke="#000000" 
               strokeWidth={3}
               fill="url(#elevationGradient)" 
             />
@@ -96,32 +96,28 @@ const ElevationProfile = ({ elevationData, routeInfo }) => {
         <StatCard 
           label="Max Elevation"
           value={`${maxElevation.toFixed(0)}m`}
-          color="from-red-500 to-orange-500"
         />
         <StatCard 
           label="Min Elevation"
           value={`${minElevation.toFixed(0)}m`}
-          color="from-blue-500 to-cyan-500"
         />
         <StatCard 
           label="Range"
           value={`${elevationRange.toFixed(0)}m`}
-          color="from-purple-500 to-pink-500"
         />
         <StatCard 
           label="Avg Gradient"
           value={`${((routeInfo?.elevationGain / (routeInfo?.distanceKm * 1000)) * 100).toFixed(1)}%`}
-          color="from-green-500 to-emerald-500"
         />
       </div>
     </div>
   );
 };
 
-const StatCard = ({ label, value, color }) => (
-  <div className={`bg-gradient-to-br ${color} p-4 rounded-xl shadow-md text-center transform hover:scale-105 transition-transform`}>
-    <div className="text-xs text-white/90 font-medium mb-2">{label}</div>
-    <div className="text-2xl font-bold text-white">{value}</div>
+const StatCard = ({ label, value }) => (
+  <div className="bg-white border-2 border-gray-300 p-4 rounded-xl shadow-md text-center transform hover:scale-105 transition-transform">
+    <div className="text-xs text-gray-600 font-medium mb-2">{label}</div>
+    <div className="text-2xl font-bold text-black">{value}</div>
   </div>
 );
 

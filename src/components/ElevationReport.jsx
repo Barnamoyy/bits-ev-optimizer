@@ -17,13 +17,13 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
   const minElevation = Math.min(...elevationProfile.map(d => d.elevation));
   const elevationRange = maxElevation - minElevation;
   const avgGradient = ((routeData.elevationGain / (routeData.distanceKm * 1000)) * 100).toFixed(2);
-  const totalAscentTime = (routeData.elevationGain / 10) * 60; // Rough estimate: 10m/min ascent
-  const totalDescentTime = (routeData.elevationLoss / 20) * 60; // Rough estimate: 20m/min descent
+  const totalAscentTime = (routeData.elevationGain / 10) * 60;
+  const totalDescentTime = (routeData.elevationLoss / 20) * 60;
 
   return (
-    <div className="card bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200">
-      <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-blue-200">
-        <div className="p-3 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
+    <div className="card bg-white border-2 border-gray-300">
+      <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-300">
+        <div className="p-3 bg-black rounded-xl">
           <Mountain className="w-6 h-6 text-white" />
         </div>
         <div>
@@ -34,14 +34,14 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         {/* Elevation Gain */}
-        <div className="bg-white rounded-xl p-4 border-2 border-red-200 shadow-md">
+        <div className="bg-white rounded-xl p-4 border-2 border-gray-300 shadow-md">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-2 bg-red-100 rounded-lg">
-              <TrendingUp className="w-5 h-5 text-red-600" />
+            <div className="p-2 bg-gray-200 rounded-lg">
+              <TrendingUp className="w-5 h-5 text-black" />
             </div>
             <span className="text-sm font-semibold text-gray-600">Total Elevation Gain</span>
           </div>
-          <div className="text-3xl font-bold text-red-600">
+          <div className="text-3xl font-bold text-black">
             {routeData.elevationGain.toFixed(1)} m
           </div>
           <div className="text-xs text-gray-500 mt-1">
@@ -50,14 +50,14 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
         </div>
 
         {/* Elevation Loss */}
-        <div className="bg-white rounded-xl p-4 border-2 border-green-200 shadow-md">
+        <div className="bg-white rounded-xl p-4 border-2 border-gray-300 shadow-md">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-2 bg-green-100 rounded-lg">
-              <TrendingDown className="w-5 h-5 text-green-600" />
+            <div className="p-2 bg-gray-200 rounded-lg">
+              <TrendingDown className="w-5 h-5 text-gray-600" />
             </div>
             <span className="text-sm font-semibold text-gray-600">Total Elevation Loss</span>
           </div>
-          <div className="text-3xl font-bold text-green-600">
+          <div className="text-3xl font-bold text-gray-700">
             {routeData.elevationLoss.toFixed(1)} m
           </div>
           <div className="text-xs text-gray-500 mt-1">
@@ -66,14 +66,14 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
         </div>
 
         {/* Elevation Range */}
-        <div className="bg-white rounded-xl p-4 border-2 border-purple-200 shadow-md">
+        <div className="bg-white rounded-xl p-4 border-2 border-gray-300 shadow-md">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <Activity className="w-5 h-5 text-purple-600" />
+            <div className="p-2 bg-gray-200 rounded-lg">
+              <Activity className="w-5 h-5 text-gray-600" />
             </div>
             <span className="text-sm font-semibold text-gray-600">Elevation Range</span>
           </div>
-          <div className="text-3xl font-bold text-purple-600">
+          <div className="text-3xl font-bold text-gray-700">
             {elevationRange.toFixed(1)} m
           </div>
           <div className="text-xs text-gray-500 mt-1">
@@ -82,14 +82,14 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
         </div>
 
         {/* Average Gradient */}
-        <div className="bg-white rounded-xl p-4 border-2 border-amber-200 shadow-md">
+        <div className="bg-white rounded-xl p-4 border-2 border-gray-300 shadow-md">
           <div className="flex items-center gap-2 mb-2">
-            <div className="p-2 bg-amber-100 rounded-lg">
-              <Mountain className="w-5 h-5 text-amber-600" />
+            <div className="p-2 bg-gray-200 rounded-lg">
+              <Mountain className="w-5 h-5 text-gray-700" />
             </div>
             <span className="text-sm font-semibold text-gray-600">Average Gradient</span>
           </div>
-          <div className="text-3xl font-bold text-amber-600">
+          <div className="text-3xl font-bold text-gray-800">
             {avgGradient}%
           </div>
           <div className="text-xs text-gray-500 mt-1">
@@ -101,9 +101,9 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
       {/* Detailed Metrics */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Elevation Statistics */}
-        <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-md">
+        <div className="bg-white rounded-xl p-5 border border-gray-300 shadow-md">
           <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <ArrowUp className="w-5 h-5 text-blue-600" />
+            <ArrowUp className="w-5 h-5 text-black" />
             Elevation Statistics
           </h4>
           <div className="space-y-3">
@@ -120,9 +120,9 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
         </div>
 
         {/* Gradient Analysis */}
-        <div className="bg-white rounded-xl p-5 border border-gray-200 shadow-md">
+        <div className="bg-white rounded-xl p-5 border border-gray-300 shadow-md">
           <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-            <Activity className="w-5 h-5 text-purple-600" />
+            <Activity className="w-5 h-5 text-gray-600" />
             Gradient Analysis
           </h4>
           <div className="space-y-3">
@@ -144,33 +144,33 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
       </div>
 
       {/* Energy Impact */}
-      <div className="mt-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-5 border-2 border-amber-200">
+      <div className="mt-6 bg-gray-100 rounded-xl p-5 border-2 border-gray-300">
         <h4 className="font-bold text-gray-800 mb-4 flex items-center gap-2">
-          <ArrowDown className="w-5 h-5 text-amber-600" />
+          <ArrowDown className="w-5 h-5 text-gray-700" />
           Energy Impact Summary
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-white rounded-lg p-4 border border-amber-200">
+          <div className="bg-white rounded-lg p-4 border border-gray-300">
             <div className="text-xs text-gray-600 mb-1">Uphill Energy Required</div>
-            <div className="text-xl font-bold text-red-600">
+            <div className="text-xl font-bold text-black">
               {routeData.uphillEnergy.toFixed(3)} kWh
             </div>
             <div className="text-xs text-gray-500 mt-1">
               Due to {routeData.elevationGain.toFixed(1)}m climb
             </div>
           </div>
-          <div className="bg-white rounded-lg p-4 border border-green-200">
+          <div className="bg-white rounded-lg p-4 border border-gray-300">
             <div className="text-xs text-gray-600 mb-1">Downhill Energy Recovered</div>
-            <div className="text-xl font-bold text-green-600">
+            <div className="text-xl font-bold text-gray-700">
               {routeData.regeneratedEnergy.toFixed(3)} kWh
             </div>
             <div className="text-xs text-gray-500 mt-1">
               From {routeData.elevationLoss.toFixed(1)}m descent
             </div>
           </div>
-          <div className="bg-white rounded-lg p-4 border border-blue-200">
+          <div className="bg-white rounded-lg p-4 border border-gray-300">
             <div className="text-xs text-gray-600 mb-1">Net Elevation Impact</div>
-            <div className="text-xl font-bold text-blue-600">
+            <div className="text-xl font-bold text-gray-600">
               {(routeData.uphillEnergy - routeData.regeneratedEnergy).toFixed(3)} kWh
             </div>
             <div className="text-xs text-gray-500 mt-1">
@@ -181,30 +181,30 @@ const ElevationReport = ({ routeData, elevationProfile }) => {
       </div>
 
       {/* Recommendations */}
-      <div className="mt-6 bg-blue-100 rounded-xl p-5 border-2 border-blue-300">
+      <div className="mt-6 bg-gray-100 rounded-xl p-5 border-2 border-gray-300">
         <h4 className="font-bold text-gray-800 mb-3">Driving Recommendations</h4>
         <ul className="space-y-2 text-sm text-gray-700">
           {routeData.elevationGain > 15 && (
             <li className="flex items-start gap-2">
-              <span className="text-red-600 font-bold">•</span>
+              <span className="text-black font-bold">•</span>
               <span>Significant uphill climb detected. Expect increased energy consumption.</span>
             </li>
           )}
           {routeData.elevationLoss > 15 && (
             <li className="flex items-start gap-2">
-              <span className="text-green-600 font-bold">•</span>
+              <span className="text-gray-700 font-bold">•</span>
               <span>Downhill sections available. Regenerative braking will recover energy.</span>
             </li>
           )}
           {parseFloat(avgGradient) > 5 && (
             <li className="flex items-start gap-2">
-              <span className="text-amber-600 font-bold">•</span>
+              <span className="text-gray-600 font-bold">•</span>
               <span>Steep gradient detected. Drive in economy mode for better efficiency.</span>
             </li>
           )}
           {parseFloat(avgGradient) < 2 && (
             <li className="flex items-start gap-2">
-              <span className="text-green-600 font-bold">•</span>
+              <span className="text-gray-700 font-bold">•</span>
               <span>Relatively flat route. Optimal for energy efficiency.</span>
             </li>
           )}
@@ -218,7 +218,7 @@ const MetricRow = ({ label, value, highlight, isText }) => (
   <div className="flex justify-between items-center py-2 border-b border-gray-100 last:border-0">
     <span className="text-sm text-gray-600 font-medium">{label}</span>
     <span className={`text-sm font-bold ${
-      highlight ? 'text-green-600' : isText ? 'text-gray-800' : 'text-gray-700'
+      highlight ? 'text-black' : isText ? 'text-gray-800' : 'text-gray-700'
     }`}>
       {value}
     </span>
@@ -241,4 +241,3 @@ const getTerrainType = (range) => {
 };
 
 export default ElevationReport;
-

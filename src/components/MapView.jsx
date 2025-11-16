@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, Polyline, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -35,13 +35,27 @@ const locationIcon = (color = '#3b82f6') => new L.Icon({
   popupAnchor: [0, -28],
 });
 
+// Custom optimal location icon (star shape)
+const optimalLocationIcon = new L.Icon({
+  iconUrl: 'data:image/svg+xml;base64,' + btoa(`
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#a855f7" width="36" height="36">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      <circle cx="12" cy="12" r="3" fill="#fff"/>
+    </svg>
+  `),
+  iconSize: [36, 36],
+  iconAnchor: [18, 18],
+  popupAnchor: [0, -18],
+});
+
 const MapView = ({ 
   chargingStation, 
   locations, 
   selectedRoute, 
   routePath,
   center,
-  onLocationClick 
+  onLocationClick,
+  optimalLocations = []
 }) => {
   const [map, setMap] = useState(null);
 
@@ -156,6 +170,52 @@ const MapView = ({
             />
           </>
         )}
+
+        {/* Optimal Charging Station Locations */}
+        {optimalLocations && optimalLocations.map((location, index) => (
+          <Fragment key={`optimal-${index}`}>
+            <Marker
+              position={[location.lat, location.lng]}
+              icon={optimalLocationIcon}
+            >
+              <Popup>
+                <div className="p-2">
+                  <h3 className="font-bold text-lg text-purple-600">
+                    Optimal Station {index + 1}
+                  </h3>
+                  <div className="mt-2 space-y-1 text-sm">
+                    <p><strong>Location:</strong></p>
+                    <p className="text-xs">{location.lat.toFixed(6)}, {location.lng.toFixed(6)}</p>
+                    {location.snapped && (
+                      <p className="text-xs text-green-600 font-semibold mt-1">
+                        On {location.roadName} ({location.snapDistance?.toFixed(0)}m adjustment)
+                      </p>
+                    )}
+                    {location.metrics && (
+                      <>
+                        <p className="mt-2"><strong>Avg Distance:</strong> {location.metrics.averageDistance.toFixed(0)}m</p>
+                        <p><strong>Coverage:</strong> {location.metrics.coveragePercentage.toFixed(0)}%</p>
+                        <p><strong>Max Distance:</strong> {location.metrics.maxDistance.toFixed(0)}m</p>
+                        <p><strong>Daily Trips:</strong> {location.metrics.totalDailyTrips}</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </Popup>
+            </Marker>
+            <Circle
+              center={[location.lat, location.lng]}
+              radius={150}
+              pathOptions={{ 
+                color: '#a855f7', 
+                fillColor: '#a855f7', 
+                fillOpacity: 0.1,
+                weight: 2,
+                dashArray: '5, 5'
+              }}
+            />
+          </Fragment>
+        ))}
       </MapContainer>
     </div>
   );

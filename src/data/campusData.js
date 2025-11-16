@@ -44,8 +44,8 @@ export const CAMPUS_LOCATIONS = [
   {
     id: 'library',
     name: 'Library',
-    lat: 15.391583,  // Converted from 15°23'29.7"N
-    lng: 73.880444,  // Converted from 73°52'49.6"E
+    lat: 15.391583,
+    lng: 73.880444,
     elevation: 188,
     type: 'building',
   },
@@ -68,8 +68,8 @@ export const CAMPUS_LOCATIONS = [
   {
     id: 'admin-block',
     name: 'Administration Block',
-    lat: 15.392806,  // Converted from 15°23'34.1"N
-    lng: 73.880500,  // Converted from 73°52'49.8"E
+    lat: 15.392806,
+    lng: 73.880500,
     elevation: 182,
     type: 'building',
   },

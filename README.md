@@ -69,6 +69,7 @@ For detailed information about calculations and data sources, see:
 - **[CALCULATIONS.md](CALCULATIONS.md)** - Complete explanation of all physics formulas, energy calculations, and data sources
 - **[GPS_COORDINATES.md](GPS_COORDINATES.md)** - Verified GPS coordinates for all BITS Goa campus locations
 - **[API_SETUP.md](API_SETUP.md)** - API configuration for routing and elevation data
+- **[OPTIMAL_LOCATION_GUIDE.md](OPTIMAL_LOCATION_GUIDE.md)** - Guide to finding optimal charging station locations
 
 ## How It Works
 
