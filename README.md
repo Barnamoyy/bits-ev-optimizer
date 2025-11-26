@@ -4,24 +4,24 @@ A web application for optimizing electric vehicle charging schedules based on 3D
 
 ## Features
 
-- **Interactive 2D Map**: Visualize the BITS Goa campus with charging station locations and routes
-- **3D Terrain Visualization**: View campus elevation contours in an interactive 3D environment
+- **Interactive 2D Map**: Visualize the BITS Goa campus with charging station locations and routes using Deck.gl and ArcGIS.
+- **3D Terrain Visualization**: View campus elevation contours in an interactive 3D environment.
+- **Optimal Charging Station Location Finder**: Find the best locations for new charging stations based on existing routes.
 - **Energy Consumption Calculator**: Real-time calculations based on:
   - Distance and route elevation changes
   - Rolling resistance and air drag
   - Regenerative braking on downhill sections
   - Motor efficiency
-- **Battery Management**: Track battery levels and predict post-trip battery status
-- **Charging Optimizer**: Automatic recommendations for optimal charging intervals
-- **Route Planner**: Select start and end points to calculate energy requirements
-- **Elevation Profiles**: Detailed elevation charts showing terrain variations
+- **Battery Management**: Track battery levels and predict post-trip battery status.
+- **Charging Optimizer**: Automatic recommendations for optimal charging intervals.
+- **Route Planner**: Select start and end points to calculate energy requirements using real road data.
+- **Elevation Profiles**: Detailed elevation charts showing real terrain variations.
 
 ## Technologies Used
 
 - **Frontend Framework**: React 18 with Vite
 - **Styling**: Tailwind CSS
-- **2D Mapping**: Leaflet & React-Leaflet
-- **3D Visualization**: Three.js
+- **2D/3D Mapping**: @deck.gl/arcgis, @deck.gl/react, @deck.gl/core, @deck.gl/layers, @deck.gl/geo-layers
 - **Charts**: Recharts
 - **Icons**: Lucide React
 
@@ -37,7 +37,7 @@ npm install
 npm run dev
 ```
 
-3. Open your browser and navigate to `http://localhost:3000`
+3. Open your browser and navigate to `http://localhost:5173`
 
 ## Project Structure
 
@@ -45,31 +45,29 @@ npm run dev
 neena-project/
 ├── src/
 │   ├── components/
-│   │   ├── MapView.jsx          # 2D map component
-│   │   ├── TerrainView3D.jsx    # 3D terrain visualization
-│   │   ├── Dashboard.jsx        # Main dashboard with stats
-│   │   ├── RouteSelector.jsx    # Route selection interface
-│   │   └── ElevationProfile.jsx # Elevation chart component
+│   │   ├── MapView.jsx                 # 2D/3D map component using Deck.gl
+│   │   ├── Dashboard.jsx               # Main dashboard with stats
+│   │   ├── RouteSelector.jsx           # Route selection interface
+│   │   ├── ElevationProfile.jsx        # Elevation chart component
+│   │   ├── ElevationReport.jsx         # Component to display elevation statistics
+│   │   └── OptimalLocationFinder.jsx   # Interface for finding optimal charging station locations
 │   ├── data/
-│   │   └── campusData.js        # BITS Goa campus location data
+│   │   └── campusData.js               # BITS Goa campus location data
+│   ├── services/
+│   │   ├── routingService.js           # Service for fetching route data
+│   │   ├── elevationService.js         # Service for fetching elevation data
+│   │   └── roadSnappingService.js      # Service for snapping points to roads
 │   ├── utils/
-│   │   └── energyCalculator.js  # Energy consumption algorithms
-│   ├── App.jsx                  # Main application component
-│   ├── main.jsx                 # Application entry point
-│   └── index.css                # Global styles
+│   │   ├── energyCalculator.js         # Energy consumption algorithms
+│   │   └── chargingStationOptimizer.js # Algorithms for finding optimal charging station locations
+│   ├── App.jsx                         # Main application component
+│   ├── main.jsx                        # Application entry point
+│   └── index.css                       # Global styles
 ├── index.html
 ├── package.json
 ├── vite.config.js
 └── tailwind.config.js
 ```
-
-## Documentation
-
-For detailed information about calculations and data sources, see:
-- **[CALCULATIONS.md](CALCULATIONS.md)** - Complete explanation of all physics formulas, energy calculations, and data sources
-- **[GPS_COORDINATES.md](GPS_COORDINATES.md)** - Verified GPS coordinates for all BITS Goa campus locations
-- **[API_SETUP.md](API_SETUP.md)** - API configuration for routing and elevation data
-- **[OPTIMAL_LOCATION_GUIDE.md](OPTIMAL_LOCATION_GUIDE.md)** - Guide to finding optimal charging station locations
 
 ## How It Works
 
@@ -96,6 +94,14 @@ The application calculates energy consumption using physics-based formulas:
 5. **Total Energy**:
    - `E_total = (E_rr + E_air + E_uphill - E_regen) / η_motor`
 
+### Optimal Location Finder
+
+The "Optimal Location Finder" uses a k-means clustering algorithm to identify the best locations for new charging stations. It works by:
+1.  Collecting all the routes selected by the user.
+2.  Treating each route as a data point.
+3.  Running the k-means algorithm to find the center of the clusters of routes.
+4.  The center of the largest cluster is the optimal location for a new charging station.
+
 ### Charging Optimization
 
 The system recommends charging when:
@@ -114,12 +120,12 @@ Routes are rated based on terrain gradient:
 
 ## Usage
 
-1. **Select Route**: Choose start and end locations from the dropdown menus or use quick route buttons
-2. **View Calculations**: The dashboard shows real-time energy consumption, battery usage, and efficiency ratings
-3. **Adjust Battery Level**: Use the slider in the header to set current battery level
-4. **Toggle Views**: Switch between 2D map and 3D terrain visualization
-5. **Analyze Elevation**: View detailed elevation profiles with gain/loss statistics
-6. **Charging Recommendations**: Get automatic alerts when charging is needed
+1. **Select Route**: Choose start and end locations from the dropdown menus or use quick route buttons.
+2. **View Calculations**: The dashboard shows real-time energy consumption, battery usage, and efficiency ratings.
+3. **Adjust Battery Level**: Use the slider in the header to set current battery level.
+4. **Find Optimal Location**: Use the "Optimal Location Finder" to identify the best spots for new charging stations.
+5. **Analyze Elevation**: View detailed elevation profiles with gain/loss statistics.
+6. **Charging Recommendations**: Get automatic alerts when charging is needed.
 
 ## Future Enhancements
 
@@ -131,6 +137,7 @@ Routes are rated based on terrain gradient:
 - [ ] Integration with actual EV APIs
 - [ ] Mobile app version
 - [ ] Real campus elevation data (DEM/SRTM)
+- [ ] Integration with ArcGIS services for more advanced geospatial analysis
 
 ## Vehicle Parameters (Default)
 
@@ -149,4 +156,3 @@ This project is for educational purposes as part of the BITS Goa coursework.
 ## Contributors
 
 Developed for BITS Goa campus EV charging optimization.
-
